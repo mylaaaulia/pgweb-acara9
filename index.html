@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h2>Form Input</h2>
+    <form action="input.php" onsubmit="return validateForm()" method="post">
+        <label for="kecamatan">Kecamatan:</label><br>
+        <input type="text" id="kecamatan" name="kecamatan" value=""><br>
+
+        <label for="luas">Luas:</label><br>
+        <input type="text" id="luas" name="luas" value=""><br>
+
+        <label for="jumlah_penduduk">Jumlah Penduduk:</label><br>
+        <input type="text" id="jumlah_penduduk" name="jumlah_penduduk" value=""><br>
+
+        <label for="longitude">Longitude:</label><br>
+        <input type="text" id="longitude" name="longitude" value=""><br>
+
+        <label for="latitude">Latitude:</label><br>
+        <input type="text" id="latitude" name="latitude" value=""><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <p id="informasi"></p>
+    <script>
+        function validateForm() {
+            let kecamatan = document.getElementById("kecamatan").value;
+            let luas = document.getElementById("luas").value;
+            let jumlahPenduduk = document.getElementById("jumlah_penduduk").value;
+            let longitude = document.getElementById("longitude").value;
+            let latitude = document.getElementById("latitude").value;
+            let text = "";
+
+            // Validasi kecamatan
+            if (kecamatan.trim() === "") {
+                text += "Data kecamatan tidak boleh kosong.<br>";
+            }
+
+            // Validasi luas
+            if (isNaN(luas) || luas < 1) {
+                text += "Data luas harus angka dan tidak boleh bernilai negatif.<br>";
+            }
+
+            // Validasi jumlah penduduk
+            if (isNaN(jumlahPenduduk) || jumlahPenduduk < 1) {
+                text += "Data jumlah penduduk harus angka dan tidak boleh bernilai negatif.<br>";
+            }
+
+            // Validasi longitude dan latitude
+            if (isNaN(longitude) || isNaN(latitude)) {
+                text += "Data longitude dan latitude harus berupa angka.<br>";
+            }
+
+            document.getElementById("informasi").innerHTML = text;
+
+            // Jika ada pesan, hentikan pengiriman form
+            if (text !== "") {
+                return false;
+            }
+
+            return true; // Lanjutkan pengiriman form jika semua validasi berhasil
+        }
+    </script>
+</body>
+
+</html>
